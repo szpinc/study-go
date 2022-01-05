@@ -9,14 +9,13 @@ import (
 
 func main() {
 
-	os.Args = append(os.Args, "http://www.baidu.com")
-
-	for _, arg := range os.Args {
+	for _, arg := range os.Args[1:] {
 		resp, err := http.Get(arg)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "fetch error: %v\n", err)
 			continue
 		}
+
 		body, err := ioutil.ReadAll(resp.Body)
 
 		resp.Body.Close()
@@ -24,7 +23,10 @@ func main() {
 			fmt.Fprintf(os.Stderr, "read body error: %v\n", err)
 			continue
 		}
-		fmt.Println(body)
+		fmt.Println(string(body))
+
+		// 也可以直接用io.Copy来复制响应体到终端
+		// io.Copy(os.Stdout, resp.Body)
 	}
 
 }
