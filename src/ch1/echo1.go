@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 )
 
@@ -12,4 +13,5 @@ func main() {
 		sep = " "
 	}
 	fmt.Println(s)
+	log.Println(s)
 }
