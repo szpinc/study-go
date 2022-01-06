@@ -35,3 +35,8 @@ func equal(s1 []string, s2 []string) bool {
 	}
 	return true
 }
+
+func remove(s []string, index int) []string {
+	copy(s[index:], s[index+1:])
+	return s[:len(s)-1]
+}
