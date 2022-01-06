@@ -14,7 +14,7 @@ var (
 
 func init() {
 	flag.BoolVar(&help, "h", false, "help")
-	flag.StringVar(&hashType, "t", "hash256", "加密类型:hash256,hash384,hash512")
+	flag.StringVar(&hashType, "t", "hash256", "`加密类型`:hash256,hash384,hash512")
 }
 
 func main() {
@@ -25,6 +25,7 @@ func main() {
 
 	if help {
 		flag.PrintDefaults()
+		return
 	}
 
 	println("type:", hashType)
