@@ -13,9 +13,6 @@ var mu sync.Mutex
 func main() {
 	http.HandleFunc("/", handle)
 	http.HandleFunc("/count", counter)
-	http.HandleFunc("/gif", func(response http.ResponseWriter, request *http.Request) {
-		ch1.Lissajous(response)
-	})
 	log.Fatal(http.ListenAndServe("localhost:8000", nil))
 }
 
