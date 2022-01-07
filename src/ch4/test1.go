@@ -6,8 +6,6 @@ func main() {
 }
 
 // 反转函数，使用数组指针实现
-func reverse(array *[]int) {
-	for i := 0; i < len(*array); i++ {
+func reverse(array *[5]int) {
 
-	}
 }
