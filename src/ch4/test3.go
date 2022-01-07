@@ -14,30 +14,20 @@ func removeRepeatString(s []string) []string {
 		return s
 	}
 
-	var temp = s
-	for true {
-		t, stat := remove(temp)
-		if stat {
-			return t
+	length := len(s)
+	for i, v := range s {
+		if i == length-1 {
+			continue
 		}
-		temp = t
+
 	}
+
 	return s
 }
 
-func remove(s []string) ([]string, bool) {
-	index := 0
-	for i := 0; i < len(s); i++ {
-		if i == 0 {
-			continue
-		}
-		if s[i] == s[i-1] {
-			s[index] = s[i-1]
-			i++
-		}
+func remove(s []string) []string {
+	i := len(s)
+	for i, v := range s {
+
 	}
-	if index == 0 {
-		return s, true
-	}
-	return s[:index], false
 }
