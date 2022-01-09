@@ -1,6 +1,7 @@
 package users
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 )
@@ -30,5 +31,5 @@ func saveToFile(user *User) bool {
 }
 
 func saveToDatabase(user *User) bool {
-
+	sql.DB
 }
