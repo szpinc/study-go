@@ -28,6 +28,6 @@ func removeRepeatString(s []string) []string {
 func remove(s []string) []string {
 	i := len(s)
 	for i, v := range s {
-
+		
 	}
 }
