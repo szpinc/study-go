@@ -2,8 +2,9 @@ package users
 
 import (
 	"time"
-	"ups/config/db"
-	"ups/util"
+
+	"github.com/szpinc/study-go/ups/config/db"
+	"github.com/szpinc/study-go/ups/util"
 
 	"github.com/google/uuid"
 )

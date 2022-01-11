@@ -5,12 +5,15 @@ import (
 	"fmt"
 	"io/ioutil"
 
+	"github.com/sirupsen/logrus"
+	"github.com/szpinc/study-go/logger"
 	"gopkg.in/yaml.v2"
 )
 
 var (
 	config      SqlConf
 	maxPoolSize int
+	log         *logrus.Logger = logger.Logger()
 )
 
 type Conn sql.DB
@@ -68,13 +71,17 @@ func init() {
 
 	pool = []*Connection{}
 
-	for i := 0; i < maxPoolSize; i++ {
+	log.Info("初始化连接...")
 
+	for i := 0; i < maxPoolSize; i++ {
+		log.Debug("创建连接-", i)
 		c, err := newConn()
 		if err != nil {
-
+			log.Warn("连接创建失败", err)
+			continue
 		}
 		pool = append(pool, c)
+		log.Debug("连接创建成功")
 	}
 }
 
@@ -96,6 +103,7 @@ func GetConnection() (*Connection, error) {
 	return c, nil
 }
 
+// 新建一个连接
 func newConn() (*Connection, error) {
 
 	datasource := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8", config.User, config.Password, config.Host, config.Port, config.Database)
@@ -111,7 +119,8 @@ func newConn() (*Connection, error) {
 	return &conn, nil
 }
 
-func (connection *Connection) CloseInPool() error {
+// 关闭连接，放进连接池中
+func (connection *Connection) Close() error {
 	// pool还有空间，则回收连接
 	if len(pool) < maxPoolSize {
 		pool = append(pool, connection)
@@ -119,12 +128,4 @@ func (connection *Connection) CloseInPool() error {
 	}
 	// 连接池没有空间了，则直接关闭连接
 	return connection.Db.Close()
-}
-
-func Exec(sql string, args ...interface{}) (_ sql.Result, err error) {
-	conn, err := GetConnection()
-	if err != nil {
-		return nil, err
-	}
-	return conn.Db.Exec(sql, args...)
 }
