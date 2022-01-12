@@ -1,9 +1,8 @@
-package main
+package sort
 
 import (
 	"fmt"
 	"os"
-	"sort"
 	"text/tabwriter"
 	"time"
 )
@@ -21,10 +20,6 @@ var tracks = []*Track{
 	{"Go", "Moby", "Moby", 1992, trackLength("3m37s")},
 	{"Go Ahead", "Alicia Keys", "As I Am", 2007, trackLength("4m36s")},
 	{"Ready 2 Go", "Martin Solveig", "Smash", 2011, trackLength("4m24s")},
-}
-
-func main() {
-	sort.Sort(byArtist(tracks))
 }
 
 func print(tracks []*Track) {

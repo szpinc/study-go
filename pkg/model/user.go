@@ -28,6 +28,7 @@ func Register(username string, password string, nickname string) (*User, error) 
 	// 构建用户信息结构体
 	user := buildUser(username, password, nickname)
 	conn, err := db.GetConnection()
+
 	if err != nil {
 		return nil, err
 	}
@@ -44,6 +45,9 @@ func Register(username string, password string, nickname string) (*User, error) 
 		log.Error("sql执行错误", err)
 		return nil, err
 	}
+
+	defer conn.Close()
+
 	return user, nil
 }
 
