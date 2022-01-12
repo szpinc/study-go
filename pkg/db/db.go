@@ -1,4 +1,4 @@
-package util
+package db
 
 import (
 	"database/sql"
@@ -8,6 +8,8 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/szpinc/study-go/logger"
 	"gopkg.in/yaml.v2"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var (
